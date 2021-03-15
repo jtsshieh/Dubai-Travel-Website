@@ -1,10 +1,6 @@
-import { makeStyles, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles({});
+import { Typography } from '@material-ui/core';
 
 export function Home() {
-	const classes = useStyles();
-
 	return (
 		<>
 			<Typography variant="body1">
