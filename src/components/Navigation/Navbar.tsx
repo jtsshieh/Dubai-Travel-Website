@@ -5,17 +5,14 @@ import { DrawerNav } from './DrawerNav';
 export function Navbar() {
 	const [mobileOpen, setMobileOpen] = useState(false);
 
-	const handleDrawerToggle = () => {
+	const toggleDrawer = () => {
 		setMobileOpen(!mobileOpen);
 	};
 
 	return (
 		<>
-			<TopBar handleDrawerToggle={handleDrawerToggle} />
-			<DrawerNav
-				handleDrawerToggle={handleDrawerToggle}
-				mobileOpen={mobileOpen}
-			/>
+			<TopBar toggleDrawer={toggleDrawer} />
+			<DrawerNav toggleDrawer={toggleDrawer} mobileOpen={mobileOpen} />
 		</>
 	);
 }

@@ -6,6 +6,7 @@ import {
 	ListItemIcon,
 	ListItemText,
 	makeStyles,
+	SwipeableDrawer,
 	Toolbar,
 } from '@material-ui/core';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -15,7 +16,7 @@ import { createElement } from 'react';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
 	drawer: {
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('md')]: {
 			width: drawerWidth,
 			flexShrink: 0,
 		},
@@ -30,10 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 interface DrawerNavProps {
 	mobileOpen: boolean;
-	handleDrawerToggle: () => void;
+	toggleDrawer: () => void;
 }
 
-export function DrawerNav({ mobileOpen, handleDrawerToggle }: DrawerNavProps) {
+export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const classes = useStyles();
 	const location = useLocation();
 
@@ -49,7 +50,7 @@ export function DrawerNav({ mobileOpen, handleDrawerToggle }: DrawerNavProps) {
 							component={NavLink}
 							to={route.path}
 							key={route.name}
-							onClick={() => (mobileOpen ? handleDrawerToggle() : undefined)}
+							onClick={() => (mobileOpen ? toggleDrawer() : undefined)}
 						>
 							<ListItemIcon children={createElement(route.icon)} />
 							<ListItemText primary={route.name} />
@@ -62,8 +63,8 @@ export function DrawerNav({ mobileOpen, handleDrawerToggle }: DrawerNavProps) {
 
 	return (
 		<>
-			<Hidden smUp implementation="css">
-				<Drawer
+			<Hidden mdUp implementation="css">
+				<SwipeableDrawer
 					className={classes.drawer}
 					variant="temporary"
 					classes={{
@@ -73,12 +74,13 @@ export function DrawerNav({ mobileOpen, handleDrawerToggle }: DrawerNavProps) {
 						keepMounted: true,
 					}}
 					open={mobileOpen}
-					onClose={handleDrawerToggle}
+					onOpen={toggleDrawer}
+					onClose={toggleDrawer}
 				>
 					{drawer}
-				</Drawer>
+				</SwipeableDrawer>
 			</Hidden>
-			<Hidden xsDown implementation="css">
+			<Hidden smDown implementation="css">
 				<Drawer
 					className={classes.drawer}
 					classes={{

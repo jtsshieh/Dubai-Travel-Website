@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 		zIndex: theme.zIndex.drawer + 1,
 	},
 	menuButton: {
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('md')]: {
 			display: 'none',
 		},
 	},
@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface TopBarProps {
-	handleDrawerToggle: () => void;
+	toggleDrawer: () => void;
 }
 
-export function TopBar({ handleDrawerToggle }: TopBarProps) {
+export function TopBar({ toggleDrawer }: TopBarProps) {
 	const classes = useStyles();
 
 	const { darkTheme, setDarkTheme } = useContext(ThemeSwitcherContext);
@@ -55,7 +55,7 @@ export function TopBar({ handleDrawerToggle }: TopBarProps) {
 							color="inherit"
 							aria-label="Open Drawer"
 							edge="start"
-							onClick={handleDrawerToggle}
+							onClick={toggleDrawer}
 							className={classes.menuButton}
 						>
 							<Menu />

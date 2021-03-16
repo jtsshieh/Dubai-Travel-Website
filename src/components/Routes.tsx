@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
-import { makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { Container, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { routes } from './RouteConstants';
 import { createElement } from 'react';
 
@@ -9,15 +9,15 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(3),
 		color: theme.palette.text.primary,
 		minHeight: '100vh',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	picture: {
 		width: '100%',
-		height: '30%',
+		height: '30vh',
 		objectFit: 'cover',
 		border: '1px solid rgba(0, 0, 0, 0.12)',
-	},
-	title: {
-		textAlign: 'center',
 	},
 }));
 
@@ -25,7 +25,7 @@ export function Routes() {
 	const classes = useStyles();
 
 	return (
-		<main className={classes.content}>
+		<Container className={classes.content}>
 			<Toolbar />
 			<Switch>
 				{routes.map((route) => (
@@ -35,7 +35,7 @@ export function Routes() {
 							src={route.headerImage}
 							className={classes.picture}
 						/>
-						<Typography variant="h2" className={classes.title}>
+						<Typography variant="h2" gutterBottom>
 							{route.name}
 						</Typography>
 
@@ -43,6 +43,6 @@ export function Routes() {
 					</Route>
 				))}
 			</Switch>
-		</main>
+		</Container>
 	);
 }

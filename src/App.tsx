@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
 	createMuiTheme,
+	CssBaseline,
 	ThemeProvider,
 	useMediaQuery,
 } from '@material-ui/core';
@@ -28,15 +29,9 @@ function App() {
 			createMuiTheme({
 				palette: {
 					primary: {
-						light: '#3394ff',
-						main: '#007aff',
-						dark: '#0055b2',
-						contrastText: '#fff',
-					},
-					secondary: {
-						light: '#ff9c33',
-						main: '#ff8400',
-						dark: '#b25c00',
+						light: '#768fff',
+						main: '#2962ff',
+						dark: '#0039cb',
 						contrastText: '#fff',
 					},
 					type: darkTheme ? 'dark' : 'light',
@@ -49,6 +44,7 @@ function App() {
 		<StylesProvider jss={jss}>
 			<ThemeProvider theme={theme}>
 				<ThemeSwitcherContext.Provider value={{ darkTheme, setDarkTheme }}>
+					<CssBaseline />
 					<BrowserRouter>
 						<RootPage />
 					</BrowserRouter>
