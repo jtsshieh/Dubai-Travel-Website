@@ -3,6 +3,7 @@ import {
 	IconButton,
 	makeStyles,
 	Toolbar,
+	Tooltip,
 	Typography,
 } from '@material-ui/core';
 import { Brightness3, WbSunny, Menu } from '@material-ui/icons';
@@ -49,23 +50,30 @@ export function TopBar({ handleDrawerToggle }: TopBarProps) {
 		<AppBar position="fixed" className={classes.appBar}>
 			<Toolbar>
 				<div className={classes.left}>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						edge="start"
-						onClick={handleDrawerToggle}
-						className={classes.menuButton}
-					>
-						<Menu />
-					</IconButton>
+					<Tooltip title="Open Drawer">
+						<IconButton
+							color="inherit"
+							aria-label="Open Drawer"
+							edge="start"
+							onClick={handleDrawerToggle}
+							className={classes.menuButton}
+						>
+							<Menu />
+						</IconButton>
+					</Tooltip>
 					<Typography variant="h6" noWrap>
 						Dubai
 					</Typography>
 				</div>
 				<div className={classes.right}>
-					<IconButton onClick={() => setDarkTheme(!darkTheme)}>
-						{darkTheme ? <WbSunny /> : <Brightness3 />}
-					</IconButton>
+					<Tooltip title="Toggle Dark/Light Theme">
+						<IconButton
+							onClick={() => setDarkTheme(!darkTheme)}
+							aria-label="Toggle Dark/Light Theme"
+						>
+							{darkTheme ? <WbSunny /> : <Brightness3 />}
+						</IconButton>
+					</Tooltip>
 				</div>
 			</Toolbar>
 		</AppBar>
