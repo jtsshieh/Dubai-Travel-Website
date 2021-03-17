@@ -1,4 +1,4 @@
-import { Box, Card, makeStyles, Typography } from '@material-ui/core';
+import { Card, makeStyles, Typography } from '@material-ui/core';
 import { createElement } from 'react';
 import { TopRoute } from './RouteConstants';
 

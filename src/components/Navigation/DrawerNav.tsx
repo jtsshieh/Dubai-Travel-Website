@@ -1,14 +1,17 @@
 import {
+	Divider,
 	Drawer,
 	Hidden,
 	List,
+	ListSubheader,
 	makeStyles,
 	SwipeableDrawer,
 	Toolbar,
 } from '@material-ui/core';
 import {
-	APP_ROUTES,
 	AppRoute,
+	DRAWER_LINKS,
+	DrawerLink,
 	isRouteWithChildren,
 	isTopRoute,
 } from '../RouteConstants';
@@ -39,33 +42,45 @@ interface DrawerNavProps {
 export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const classes = useStyles();
 
-	const generateListItems = (routes: AppRoute[], baseRoute: string = '') => {
-		return routes.map((route) => {
-			if (isTopRoute(route)) {
-				return (
-					<DrawerItem
-						baseRoute={baseRoute}
-						route={route}
-						mobileOpen={mobileOpen}
-						toggleDrawer={toggleDrawer}
-					/>
-				);
-			} else if (isRouteWithChildren(route)) {
-				return (
-					<DrawerCollapsable route={route}>
-						{generateListItems(route.children, baseRoute + route.path)}
-					</DrawerCollapsable>
-				);
+	const parseDrawerLinks = (drawerLinks: DrawerLink[]) => {
+		return drawerLinks.map((link) => {
+			if (link.type === 'divider') {
+				return <Divider />;
+			} else if (link.type === 'subheader') {
+				return <ListSubheader>{link.text}</ListSubheader>;
+			} else if (link.type === 'link') {
+				return generateListItem(link.route);
 			}
 			return <></>;
 		});
+	};
+
+	const generateListItem = (route: AppRoute, baseRoute: string = '') => {
+		if (isTopRoute(route)) {
+			return (
+				<DrawerItem
+					baseRoute={baseRoute}
+					route={route}
+					mobileOpen={mobileOpen}
+					toggleDrawer={toggleDrawer}
+				/>
+			);
+		} else if (isRouteWithChildren(route)) {
+			return (
+				<DrawerCollapsable route={route}>
+					{route.children.map((subRoute) => {
+						return generateListItem(subRoute, baseRoute + route.path);
+					})}
+				</DrawerCollapsable>
+			);
+		}
 	};
 
 	const drawer = (
 		<>
 			<Toolbar />
 			<div className={classes.drawerContainer}>
-				<List>{generateListItems(APP_ROUTES)}</List>
+				<List>{parseDrawerLinks(DRAWER_LINKS)}</List>
 			</div>
 		</>
 	);

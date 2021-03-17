@@ -44,8 +44,6 @@ export function Routes() {
 		return result;
 	};
 
-	console.log(generateRoutes(APP_ROUTES));
-
 	return (
 		<Container className={classes.content}>
 			<Toolbar />

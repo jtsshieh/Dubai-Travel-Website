@@ -2,6 +2,8 @@ import ReactMarkdown from 'react-markdown';
 import EtihadFlight from '../../images/etihad_flight.jpg';
 import renderers from '../../MaterialMDRenderer';
 import { Card, CardContent, CardMedia, makeStyles } from '@material-ui/core';
+import { Flight as FlightIcon } from '@material-ui/icons';
+import Airplane from '../../images/airplane.jpg';
 
 const article = `Getting to Dubai is quite simple. The international airport, [Dubai International](https://www.dubaiairports.ae/), is a hub for Emirates, which flies to many destinations. There is a high likelihood that there will be a direct flight from your airport to Dubai.  
 
@@ -49,3 +51,11 @@ export function Transportation() {
 		</div>
 	);
 }
+
+export const TransportationRoute = {
+	name: 'Transportation',
+	path: '/transportation',
+	component: Transportation,
+	icon: FlightIcon,
+	headerImage: Airplane,
+};

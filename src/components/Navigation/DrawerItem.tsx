@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import { createElement } from 'react';
 import { AppRoute } from '../RouteConstants';
+import clsx from 'clsx';
 
 interface Props {
 	nestingLevel: number;
@@ -19,6 +20,9 @@ const useDrawerItemStyles = makeStyles((theme) => ({
 					paddingLeft: theme.spacing((props.nestingLevel - 1) * 8),
 			  }
 			: {},
+	listItem: {
+		borderRadius: '0 2rem 2rem 0',
+	},
 }));
 
 interface DrawerItemProps {
@@ -49,7 +53,7 @@ export function DrawerItem({
 			to={path}
 			key={route.name}
 			onClick={() => (mobileOpen ? toggleDrawer() : undefined)}
-			className={classes.nested}
+			className={clsx(classes.nested, classes.listItem)}
 		>
 			{route.icon && <ListItemIcon children={createElement(route.icon)} />}
 			<ListItemText primary={route.name} />

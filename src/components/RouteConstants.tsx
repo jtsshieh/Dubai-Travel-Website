@@ -1,18 +1,9 @@
-import {
-	SvgIconComponent,
-	Home as HomeIcon,
-	WbSunny,
-	Flight as FlightIcon,
-	Place as PlaceIcon,
-} from '@material-ui/icons';
-import { Home } from '../pages/Home/Home';
-import { Weather } from '../pages/Weather/Weather';
-import { Transportation } from '../pages/Transportation/Transportation';
-import DubaiFountains from '../images/dubai_fountain.jpg';
-import Airplane from '../images/airplane.jpg';
-import WeatherHeader from '../images/weather.jpg';
-import { PalmJumeirah } from '../pages/Places/PalmJumeirah';
-import PalmJumeirahImage from '../images/palm_jumeirah.jpg';
+import { SvgIconComponent } from '@material-ui/icons';
+
+import { HomeRoute } from '../pages/Home/Home';
+import { WeatherRoute } from '../pages/Weather/Weather';
+import { TransportationRoute } from '../pages/Transportation/Transportation';
+import { PlacesRoute } from '../pages/Places/PlacesRoute';
 
 export type AppRoute = RouteWithChildren | TopRoute;
 
@@ -42,39 +33,32 @@ export function isRouteWithChildren(
 }
 
 export const APP_ROUTES: AppRoute[] = [
-	{
-		name: 'Home',
-		path: '/',
-		component: Home,
-		icon: HomeIcon,
-		headerImage: DubaiFountains,
-	},
-	{
-		name: 'Weather',
-		path: '/weather',
-		component: Weather,
-		icon: WbSunny,
-		headerImage: WeatherHeader,
-	},
-	{
-		name: 'Transportation',
-		path: '/transportation',
-		component: Transportation,
-		icon: FlightIcon,
-		headerImage: Airplane,
-	},
+	HomeRoute,
+	WeatherRoute,
+	TransportationRoute,
+	PlacesRoute,
+];
 
-	{
-		name: 'Places',
-		path: '/places',
-		icon: PlaceIcon,
-		children: [
-			{
-				name: 'Palm Jumeirah',
-				path: '/palm',
-				component: PalmJumeirah,
-				headerImage: PalmJumeirahImage,
-			},
-		],
-	},
+export interface Divider {
+	type: 'divider';
+}
+export interface Subheader {
+	type: 'subheader';
+	text: string;
+}
+export interface Link {
+	type: 'link';
+	route: AppRoute;
+}
+export type DrawerLink = Divider | Subheader | Link;
+
+export const DRAWER_LINKS: DrawerLink[] = [
+	{ type: 'link', route: HomeRoute },
+	{ type: 'divider' },
+	{ type: 'subheader', text: 'Getting Ready' },
+	{ type: 'link', route: WeatherRoute },
+	{ type: 'link', route: TransportationRoute },
+	{ type: 'divider' },
+	{ type: 'subheader', text: 'Things to Do' },
+	{ type: 'link', route: PlacesRoute },
 ];
