@@ -1,13 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import renderers from '../../MaterialMDRenderer';
-import {
-	Card,
-	CircularProgress,
-	makeStyles,
-	useTheme,
-} from '@material-ui/core';
-import { Chart } from 'react-google-charts';
-import { ChartWrapperOptions } from 'react-google-charts/dist/types';
+import { Card, makeStyles } from '@material-ui/core';
 import { WeatherChart } from './WeatherChart';
 
 const article = `The weather in Dubai is very warm. You'll find the most comfortable temperatures during the months of November to March. During those months, you can expect low temperatures of around 60 degrees Fahrenheit and highs of 80 to 90 degrees Fahrenheit. There is also little to no precipitation. 

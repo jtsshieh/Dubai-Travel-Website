@@ -36,6 +36,9 @@ function App() {
 					},
 					type: darkTheme ? 'dark' : 'light',
 				},
+				shape: {
+					borderRadius: 10,
+				},
 			}),
 		[darkTheme]
 	);

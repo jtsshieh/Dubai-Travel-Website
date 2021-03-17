@@ -2,16 +2,18 @@ import {
 	Drawer,
 	Hidden,
 	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
 	makeStyles,
 	SwipeableDrawer,
 	Toolbar,
 } from '@material-ui/core';
-import { NavLink, useLocation } from 'react-router-dom';
-import { routes } from '../RouteConstants';
-import { createElement } from 'react';
+import {
+	APP_ROUTES,
+	AppRoute,
+	isRouteWithChildren,
+	isTopRoute,
+} from '../RouteConstants';
+import { DrawerCollapsable } from './DrawerCollapsable';
+import { DrawerItem } from './DrawerItem';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -36,27 +38,34 @@ interface DrawerNavProps {
 
 export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const classes = useStyles();
-	const location = useLocation();
+
+	const generateListItems = (routes: AppRoute[], baseRoute: string = '') => {
+		return routes.map((route) => {
+			if (isTopRoute(route)) {
+				return (
+					<DrawerItem
+						baseRoute={baseRoute}
+						route={route}
+						mobileOpen={mobileOpen}
+						toggleDrawer={toggleDrawer}
+					/>
+				);
+			} else if (isRouteWithChildren(route)) {
+				return (
+					<DrawerCollapsable route={route}>
+						{generateListItems(route.children, baseRoute + route.path)}
+					</DrawerCollapsable>
+				);
+			}
+			return <></>;
+		});
+	};
 
 	const drawer = (
 		<>
 			<Toolbar />
 			<div className={classes.drawerContainer}>
-				<List>
-					{routes.map((route) => (
-						<ListItem
-							selected={location.pathname === route.path}
-							button
-							component={NavLink}
-							to={route.path}
-							key={route.name}
-							onClick={() => (mobileOpen ? toggleDrawer() : undefined)}
-						>
-							<ListItemIcon children={createElement(route.icon)} />
-							<ListItemText primary={route.name} />
-						</ListItem>
-					))}
-				</List>
+				<List>{generateListItems(APP_ROUTES)}</List>
 			</div>
 		</>
 	);
