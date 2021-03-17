@@ -4,7 +4,6 @@ import { HomeRoute } from '../pages/Home/Home';
 import { WeatherRoute } from '../pages/Weather/Weather';
 import { TransportationRoute } from '../pages/Transportation/Transportation';
 import { PlacesRoute } from '../pages/Places/PlacesRoute';
-
 export type AppRoute = RouteWithChildren | TopRoute;
 
 interface BaseRoute {
@@ -32,13 +31,6 @@ export function isRouteWithChildren(
 	return (route as RouteWithChildren).children !== undefined;
 }
 
-export const APP_ROUTES: AppRoute[] = [
-	HomeRoute,
-	WeatherRoute,
-	TransportationRoute,
-	PlacesRoute,
-];
-
 export interface Divider {
 	type: 'divider';
 }
@@ -50,9 +42,21 @@ export interface Link {
 	type: 'link';
 	route: AppRoute;
 }
-export type DrawerLink = Divider | Subheader | Link;
+export type DrawerItem = Divider | Subheader | Link;
 
-export const DRAWER_LINKS: DrawerLink[] = [
+export function isDivider(link: DrawerItem): link is Divider {
+	return link.type === 'divider';
+}
+
+export function isSubheader(link: DrawerItem): link is Subheader {
+	return link.type === 'subheader';
+}
+
+export function isLink(link: DrawerItem): link is Link {
+	return link.type === 'link';
+}
+
+export const DRAWER_ITEMS: DrawerItem[] = [
 	{ type: 'link', route: HomeRoute },
 	{ type: 'divider' },
 	{ type: 'subheader', text: 'Getting Ready' },
@@ -62,3 +66,7 @@ export const DRAWER_LINKS: DrawerLink[] = [
 	{ type: 'subheader', text: 'Things to Do' },
 	{ type: 'link', route: PlacesRoute },
 ];
+
+export const APP_ROUTES: AppRoute[] = DRAWER_ITEMS.filter(isLink).map(
+	(link) => link.route
+);

@@ -10,13 +10,16 @@ import {
 } from '@material-ui/core';
 import {
 	AppRoute,
-	DRAWER_LINKS,
-	DrawerLink,
+	DRAWER_ITEMS,
+	DrawerItem,
+	isDivider,
+	isLink,
 	isRouteWithChildren,
+	isSubheader,
 	isTopRoute,
 } from '../RouteConstants';
 import { DrawerCollapsable } from './DrawerCollapsable';
-import { DrawerItem } from './DrawerItem';
+import { DrawerItem as DrawerItemComponent } from './DrawerItem';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -42,14 +45,14 @@ interface DrawerNavProps {
 export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const classes = useStyles();
 
-	const parseDrawerLinks = (drawerLinks: DrawerLink[]) => {
-		return drawerLinks.map((link) => {
-			if (link.type === 'divider') {
+	const parseDrawerItems = (drawerLinks: DrawerItem[]) => {
+		return drawerLinks.map((item) => {
+			if (isDivider(item)) {
 				return <Divider />;
-			} else if (link.type === 'subheader') {
-				return <ListSubheader>{link.text}</ListSubheader>;
-			} else if (link.type === 'link') {
-				return generateListItem(link.route);
+			} else if (isSubheader(item)) {
+				return <ListSubheader>{item.text}</ListSubheader>;
+			} else if (isLink(item)) {
+				return generateListItem(item.route);
 			}
 			return <></>;
 		});
@@ -58,7 +61,7 @@ export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const generateListItem = (route: AppRoute, baseRoute: string = '') => {
 		if (isTopRoute(route)) {
 			return (
-				<DrawerItem
+				<DrawerItemComponent
 					baseRoute={baseRoute}
 					route={route}
 					mobileOpen={mobileOpen}
@@ -80,7 +83,7 @@ export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 		<>
 			<Toolbar />
 			<div className={classes.drawerContainer}>
-				<List>{parseDrawerLinks(DRAWER_LINKS)}</List>
+				<List>{parseDrawerItems(DRAWER_ITEMS)}</List>
 			</div>
 		</>
 	);
