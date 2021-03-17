@@ -46,11 +46,15 @@ export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 	const classes = useStyles();
 
 	const parseDrawerItems = (drawerLinks: DrawerItem[]) => {
-		return drawerLinks.map((item) => {
+		return drawerLinks.map((item, index) => {
 			if (isDivider(item)) {
-				return <Divider />;
+				return <Divider key={index} />;
 			} else if (isSubheader(item)) {
-				return <ListSubheader>{item.text}</ListSubheader>;
+				return (
+					<ListSubheader disableSticky key={index}>
+						{item.text}
+					</ListSubheader>
+				);
 			} else if (isLink(item)) {
 				return generateListItem(item.route);
 			}
@@ -66,11 +70,12 @@ export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 					route={route}
 					mobileOpen={mobileOpen}
 					toggleDrawer={toggleDrawer}
+					key={route.name}
 				/>
 			);
 		} else if (isRouteWithChildren(route)) {
 			return (
-				<DrawerCollapsable route={route}>
+				<DrawerCollapsable route={route} key={route.name}>
 					{route.children.map((subRoute) => {
 						return generateListItem(subRoute, baseRoute + route.path);
 					})}

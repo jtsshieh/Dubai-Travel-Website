@@ -7,6 +7,7 @@ import {
 	isTopRoute,
 } from './RouteConstants';
 import { AbstractPage } from './AbstractPage';
+import { NotFound } from '../pages/NotFound/NotFound';
 
 const useStyles = makeStyles((theme) => ({
 	content: {
@@ -47,7 +48,12 @@ export function Routes() {
 	return (
 		<Container className={classes.content}>
 			<Toolbar />
-			<Switch>{generateRoutes(APP_ROUTES)}</Switch>
+			<Switch>
+				{generateRoutes(APP_ROUTES)}
+				<Route>
+					<NotFound />
+				</Route>
+			</Switch>
 		</Container>
 	);
 }
