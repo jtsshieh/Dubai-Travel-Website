@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	cardContent: {
 		position: 'relative',
+		color: 'white',
 	},
 }));
 
