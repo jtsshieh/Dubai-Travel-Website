@@ -1,9 +1,10 @@
 import ReactMarkdown from 'react-markdown';
 import renderers from '../../MaterialMDRenderer';
-import { Card, makeStyles } from '@material-ui/core';
+import { Card, makeStyles, Typography } from '@material-ui/core';
 import { WeatherChart } from './WeatherChart';
 import { WbSunny } from '@material-ui/icons';
 import WeatherHeader from '../../images/weather.jpg';
+import { useEffect, useState } from 'react';
 
 const article = `The weather in Dubai is very warm. You'll find the most comfortable temperatures during the months of November to March. During those months, you can expect low temperatures of around 60 degrees Fahrenheit and highs of 80 to 90 degrees Fahrenheit. There is also little to no precipitation. 
 
@@ -28,9 +29,21 @@ const useStyles = makeStyles({
 
 export function Weather() {
 	const classes = useStyles();
+	const [data, setData] = useState<any>();
+	useEffect(() => {
+		fetch('/api/getWeatherData')
+			.then((data) => data.json())
+			.then(setData);
+	}, []);
 
 	return (
 		<div>
+			{data && (
+				<Typography variant="body1">
+					Current Temperature: {data.main.temp.toFixed(0)}° Fahrenheit
+				</Typography>
+			)}
+			<br />
 			<ReactMarkdown escapeHtml={false} renderers={renderers}>
 				{article}
 			</ReactMarkdown>

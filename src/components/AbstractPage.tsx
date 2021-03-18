@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function AbstractPage({ route }: AbstractPageProps) {
-	console.log(route.headerImage);
 	const classes = useStyles({ headerImage: route.headerImage });
 
 	return (
