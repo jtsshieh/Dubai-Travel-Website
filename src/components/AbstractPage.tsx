@@ -12,6 +12,7 @@ interface Props {
 const useStyles = makeStyles((theme) => ({
 	card: {
 		width: '100%',
+		marginTop: theme.spacing(4),
 		marginBottom: theme.spacing(4),
 	},
 	picture: {

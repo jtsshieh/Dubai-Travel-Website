@@ -11,13 +11,8 @@ import { NotFound } from '../pages/NotFound/NotFound';
 
 const useStyles = makeStyles((theme) => ({
 	content: {
-		flexGrow: 1,
-		padding: theme.spacing(3),
 		color: theme.palette.text.primary,
-		minHeight: '100vh',
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
+		overflow: 'hidden',
 	},
 }));
 
