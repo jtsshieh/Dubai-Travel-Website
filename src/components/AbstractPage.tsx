@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	credits: {
 		position: 'absolute',
+		color: 'white',
 		right: 0,
 		bottom: 0,
 	},
