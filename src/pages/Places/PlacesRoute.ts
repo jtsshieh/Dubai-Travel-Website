@@ -1,17 +1,12 @@
 import { Place as PlaceIcon } from '@material-ui/icons';
-import { PalmJumeirah } from './PalmJumeirah';
-import PalmJumeirahImage from '../../images/palm_jumeirah.jpg';
+import { PalmJumeirahRoute } from './PalmJumeirah';
+import { BurjAlArabRoute } from './BurjAlArab';
+import { RouteWithChildren } from '../../components/RouteConstants';
+import { DowntownDubaiRoute } from './DowntownDubaiRoute';
 
-export const PlacesRoute = {
+export const PlacesRoute: RouteWithChildren = {
 	name: 'Places',
 	path: '/places',
 	icon: PlaceIcon,
-	children: [
-		{
-			name: 'Palm Jumeirah',
-			path: '/palm',
-			component: PalmJumeirah,
-			headerImage: PalmJumeirahImage,
-		},
-	],
+	children: [PalmJumeirahRoute, BurjAlArabRoute, DowntownDubaiRoute],
 };

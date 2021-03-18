@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { Home as HomeIcon } from '@material-ui/icons';
 import DubaiFountains from '../../images/dubai_fountain.jpg';
+import { TopRoute } from '../../components/RouteConstants';
 
 export function Home() {
 	return (
@@ -12,10 +13,10 @@ export function Home() {
 	);
 }
 
-export const HomeRoute = {
+export const HomeRoute: TopRoute = {
 	name: 'Home',
 	path: '/',
 	component: Home,
 	icon: HomeIcon,
-	headerImage: DubaiFountains,
+	header: { image: DubaiFountains },
 };

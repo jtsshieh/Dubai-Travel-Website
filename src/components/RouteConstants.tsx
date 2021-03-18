@@ -10,7 +10,19 @@ interface BaseRoute {
 	name: string;
 	path: string;
 	icon?: SvgIconComponent;
-	headerImage?: string;
+	header?: Header;
+}
+
+interface Header {
+	image: string;
+	credits?: ImageCredits;
+}
+
+interface ImageCredits {
+	author: string;
+	authorLink: string;
+	platform: string;
+	platformLink: string;
 }
 
 export interface TopRoute extends BaseRoute {

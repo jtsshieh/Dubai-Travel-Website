@@ -1,6 +1,7 @@
 import { Card, makeStyles, Typography } from '@material-ui/core';
 import { createElement } from 'react';
 import { TopRoute } from './RouteConstants';
+import { Link } from '@material-ui/core';
 
 interface AbstractPageProps {
 	route: TopRoute;
@@ -48,10 +49,15 @@ const useStyles = makeStyles((theme) => ({
 		position: 'relative',
 		color: 'white',
 	},
+	credits: {
+		position: 'absolute',
+		right: 0,
+		bottom: 0,
+	},
 }));
 
 export function AbstractPage({ route }: AbstractPageProps) {
-	const classes = useStyles({ headerImage: route.headerImage });
+	const classes = useStyles({ headerImage: route.header?.image });
 
 	return (
 		<>
@@ -61,6 +67,18 @@ export function AbstractPage({ route }: AbstractPageProps) {
 					<Typography variant="h3" className={classes.cardContent}>
 						{route.name}
 					</Typography>
+					{route.header?.credits && (
+						<Typography variant="body1" className={classes.credits}>
+							Photo by{' '}
+							<Link href={route.header.credits.authorLink}>
+								{route.header.credits.author}
+							</Link>{' '}
+							on{' '}
+							<Link href={route.header.credits.platformLink}>
+								{route.header.credits.platform}
+							</Link>
+						</Typography>
+					)}
 				</div>
 			</Card>
 

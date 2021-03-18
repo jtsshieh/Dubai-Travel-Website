@@ -75,7 +75,7 @@ export function DrawerNav({ mobileOpen, toggleDrawer }: DrawerNavProps) {
 			);
 		} else if (isRouteWithChildren(route)) {
 			return (
-				<DrawerCollapsable route={route} key={route.name}>
+				<DrawerCollapsable route={route} key={route.name} baseRoute={baseRoute}>
 					{route.children.map((subRoute) => {
 						return generateListItem(subRoute, baseRoute + route.path);
 					})}

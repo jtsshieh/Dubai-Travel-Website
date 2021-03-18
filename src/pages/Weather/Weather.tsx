@@ -5,6 +5,7 @@ import { WeatherChart } from './WeatherChart';
 import { WbSunny } from '@material-ui/icons';
 import WeatherHeader from '../../images/weather.jpg';
 import { WeatherCard } from './WeatherCard';
+import { TopRoute } from '../../components/RouteConstants';
 
 const article = `The weather in Dubai is very warm. You'll find the most comfortable temperatures during the months of November to March. During those months, you can expect low temperatures of around 60 degrees Fahrenheit and highs of 80 to 90 degrees Fahrenheit. There is also little to no precipitation. 
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
 export function Weather() {
 	const classes = useStyles();
 	return (
-		<div>
+		<>
 			<ReactMarkdown escapeHtml={false} renderers={renderers}>
 				{article}
 			</ReactMarkdown>
@@ -46,13 +47,13 @@ export function Weather() {
 					</Card>
 				</Grid>
 			</Grid>
-		</div>
+		</>
 	);
 }
-export const WeatherRoute = {
+export const WeatherRoute: TopRoute = {
 	name: 'Weather',
 	path: '/weather',
 	component: Weather,
 	icon: WbSunny,
-	headerImage: WeatherHeader,
+	header: { image: WeatherHeader },
 };

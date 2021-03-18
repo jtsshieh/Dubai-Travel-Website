@@ -4,6 +4,7 @@ import renderers from '../../MaterialMDRenderer';
 import { Card, CardContent, CardMedia, makeStyles } from '@material-ui/core';
 import { Flight as FlightIcon } from '@material-ui/icons';
 import Airplane from '../../images/airplane.jpg';
+import { TopRoute } from '../../components/RouteConstants';
 
 const article = `Getting to Dubai is quite simple. The international airport, [Dubai International](https://www.dubaiairports.ae/), is a hub for Emirates, which flies to many destinations. There is a high likelihood that there will be a direct flight from your airport to Dubai.  
 
@@ -30,7 +31,7 @@ export function Transportation() {
 	const classes = useStyles();
 
 	return (
-		<div>
+		<>
 			<ReactMarkdown escapeHtml={false} renderers={renderers}>
 				{article}
 			</ReactMarkdown>
@@ -48,14 +49,14 @@ export function Transportation() {
 					This is an Etihad Flight
 				</CardContent>
 			</Card>
-		</div>
+		</>
 	);
 }
 
-export const TransportationRoute = {
+export const TransportationRoute: TopRoute = {
 	name: 'Transportation',
 	path: '/transportation',
 	component: Transportation,
 	icon: FlightIcon,
-	headerImage: Airplane,
+	header: { image: Airplane },
 };

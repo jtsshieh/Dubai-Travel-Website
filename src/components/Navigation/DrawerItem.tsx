@@ -17,7 +17,7 @@ const useDrawerItemStyles = makeStyles((theme) => ({
 	nested: (props: Props) =>
 		props.nestingLevel - 1 > 0
 			? {
-					paddingLeft: theme.spacing((props.nestingLevel - 1) * 8),
+					paddingLeft: theme.spacing((props.nestingLevel - 1) * 4),
 			  }
 			: {},
 	listItem: {

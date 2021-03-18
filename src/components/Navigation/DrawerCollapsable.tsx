@@ -9,21 +9,38 @@ import {
 } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import { AppRoute } from '../RouteConstants';
+import clsx from 'clsx';
 
 interface DrawerCollapsableProps {
 	route: AppRoute;
 	children: ReactNode;
+	baseRoute: string;
 }
 
-const useStyles = makeStyles({
+interface Props {
+	nestingLevel: number;
+}
+
+const useStyles = makeStyles((theme) => ({
+	nested: (props: Props) =>
+		props.nestingLevel - 1 > 0
+			? {
+					paddingLeft: theme.spacing((props.nestingLevel - 1) * 4),
+			  }
+			: {},
 	listItem: {
 		borderRadius: '0 2rem 2rem 0',
 	},
-});
+}));
 
-export function DrawerCollapsable({ route, children }: DrawerCollapsableProps) {
+export function DrawerCollapsable({
+	route,
+	children,
+	baseRoute,
+}: DrawerCollapsableProps) {
+	const path = baseRoute + route.path;
 	const [collapsed, setCollapsed] = useState(true);
-	const classes = useStyles();
+	const classes = useStyles({ nestingLevel: (path.match(/\//g) || []).length });
 
 	return (
 		<>
@@ -31,7 +48,7 @@ export function DrawerCollapsable({ route, children }: DrawerCollapsableProps) {
 				key={route.name}
 				button
 				onClick={() => setCollapsed(!collapsed)}
-				className={classes.listItem}
+				className={clsx(classes.listItem, classes.nested)}
 			>
 				{route.icon && <ListItemIcon children={createElement(route.icon)} />}
 				<ListItemText primary={route.name} />
