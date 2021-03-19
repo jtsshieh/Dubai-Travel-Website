@@ -3,7 +3,7 @@ import { SvgIconComponent } from '@material-ui/icons';
 import { HomeRoute } from '../pages/Home/Home';
 import { WeatherRoute } from '../pages/Weather/Weather';
 import { TransportationRoute } from '../pages/Transportation/Transportation';
-import { PlacesRoute } from '../pages/Places/PlacesRoute';
+import { PlacesRoute } from '../pages/Places/Places';
 export type AppRoute = RouteWithChildren | TopRoute;
 
 interface BaseRoute {
@@ -13,7 +13,7 @@ interface BaseRoute {
 	header?: Header;
 }
 
-interface Header {
+export interface Header {
 	image: string;
 	credits?: ImageCredits;
 }

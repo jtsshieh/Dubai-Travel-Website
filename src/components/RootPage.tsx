@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		backgroundColor: theme.palette.background.default,
+		minHeight: '100vh',
+		paddingBottom: theme.spacing(4),
 	},
 }));
 
