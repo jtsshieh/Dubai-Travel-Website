@@ -18,14 +18,12 @@ If you do, however, choose to go to Dubai in the summer, you can expect temperat
 Most buildings in Dubai have air conditioning so you are able to wear comfortable clothing. However, the United Arab Emirates does have clothing guidelines as they are a muslim country.
 `;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	card: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
+		padding: theme.spacing(4),
 		height: 400,
 	},
-});
+}));
 
 export function Weather() {
 	const classes = useStyles();

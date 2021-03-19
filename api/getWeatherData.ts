@@ -11,5 +11,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
 	const data = await result.json();
 
+	console.log(data);
+
 	res.status(200).json(data);
 };

@@ -1,5 +1,10 @@
 import { Chart } from 'react-google-charts';
-import { CircularProgress, useTheme } from '@material-ui/core';
+import {
+	CircularProgress,
+	makeStyles,
+	Typography,
+	useTheme,
+} from '@material-ui/core';
 import { ChartWrapperOptions } from 'react-google-charts/dist/types';
 
 const chartData = [
@@ -18,8 +23,24 @@ const chartData = [
 	['Dec', 64, 64, 80, 80],
 ];
 
+const useStyles = makeStyles((theme) => ({
+	mainContent: {
+		width: '100%',
+		height: '100%',
+	},
+	loader: {
+		height: '100%',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+}));
+
 export function WeatherChart() {
 	const theme = useTheme();
+	const classes = useStyles();
 
 	const chartTextStyle = {
 		color: theme.palette.text.primary,
@@ -38,7 +59,8 @@ export function WeatherChart() {
 	const options: ChartWrapperOptions['options'] = {
 		colors: [theme.palette.primary.main],
 		chartArea: {
-			width: '85%',
+			width: '90%',
+			top: 20,
 		},
 		backgroundColor: 'transparent',
 		hAxis: {
@@ -49,23 +71,26 @@ export function WeatherChart() {
 			...axisOptions,
 			title: 'Temperature (Fahrenheit)',
 		},
-		title: 'Weather history for Dubai, United Arab Emirates',
-
-		titleTextStyle: {
-			...chartTextStyle,
-			fontSize: 18,
-		},
 		legend: 'none',
 	};
 
 	return (
-		<Chart
-			width="100%"
-			height="100%"
-			chartType="CandlestickChart"
-			loader={<CircularProgress />}
-			data={chartData}
-			options={options}
-		/>
+		<>
+			<Typography variant="h6">Weather History for Dubai</Typography>
+			<div className={classes.mainContent}>
+				<Chart
+					width="100%"
+					height="100%"
+					chartType="CandlestickChart"
+					loader={
+						<div className={classes.loader}>
+							<CircularProgress />
+						</div>
+					}
+					data={chartData}
+					options={options}
+				/>
+			</div>
+		</>
 	);
 }

@@ -7,9 +7,10 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@material-ui/core';
-import { grey, orange } from '@material-ui/core/colors';
+import { blue, grey, orange } from '@material-ui/core/colors';
 import {
 	mdiMoonFull,
+	mdiMoonWaningCrescent,
 	mdiSnowflake,
 	mdiWeatherCloudy,
 	mdiWeatherLightningRainy,
@@ -21,9 +22,17 @@ import {
 import Icon from '@mdi/react';
 
 const useStyles = makeStyles((theme) => ({
-	card: {
-		padding: theme.spacing(4),
+	mainContent: {
+		width: '100%',
 		height: '100%',
+	},
+	loader: {
+		height: '100%',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	icon: {
 		fontSize: '8rem',
@@ -31,26 +40,44 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '4rem',
 		},
 	},
+	grid: {
+		width: '100%',
+		height: '100%',
+	},
 }));
+
+const iconMap: Record<string, { icon: string; color: string }> = {
+	'01d': { icon: mdiMoonFull, color: orange[500] },
+	'01n': { icon: mdiMoonWaningCrescent, color: grey[700] },
+
+	'02d': { icon: mdiWeatherPartlyCloudy, color: grey[700] },
+	'02n': { icon: mdiWeatherPartlyCloudy, color: grey[700] },
+
+	'03d': { icon: mdiWeatherCloudy, color: grey[700] },
+	'03n': { icon: mdiWeatherCloudy, color: grey[700] },
+
+	'04d': { icon: mdiWeatherCloudy, color: grey[700] },
+	'04n': { icon: mdiWeatherCloudy, color: grey[700] },
+
+	'09d': { icon: mdiWeatherPouring, color: grey[700] },
+	'09n': { icon: mdiWeatherPouring, color: grey[700] },
+
+	'10d': { icon: mdiWeatherRainy, color: grey[700] },
+	'10n': { icon: mdiWeatherRainy, color: grey[700] },
+
+	'11d': { icon: mdiWeatherLightningRainy, color: grey[700] },
+	'11n': { icon: mdiWeatherLightningRainy, color: grey[700] },
+
+	'13d': { icon: mdiSnowflake, color: grey[700] },
+	'13n': { icon: mdiSnowflake, color: blue[200] },
+
+	'50d': { icon: mdiWeatherWindy, color: grey[500] },
+	'50n': { icon: mdiWeatherWindy, color: grey[500] },
+};
 
 export function WeatherCard() {
 	const [data, setData] = useState<any>();
 	const classes = useStyles();
-	const theme = useTheme();
-	const matched = useMediaQuery(theme.breakpoints.down('xs'));
-
-	const iconMap: Record<string, string> = {
-		'01': mdiMoonFull,
-		'02': mdiWeatherPartlyCloudy,
-		'03': mdiWeatherCloudy,
-		'04': mdiWeatherCloudy,
-
-		'09': mdiWeatherPouring,
-		'10': mdiWeatherRainy,
-		'11': mdiWeatherLightningRainy,
-		'13': mdiSnowflake,
-		'50': mdiWeatherWindy,
-	};
 
 	useEffect(() => {
 		fetch('/api/getWeatherData')
@@ -58,31 +85,56 @@ export function WeatherCard() {
 			.then(setData);
 	}, []);
 
-	if (!data) return <CircularProgress />;
+	const time = data ? new Date(data.dt * 1000) : undefined;
+
 	return (
-		<Grid container className={classes.card}>
-			<Grid item xs={12}>
-				<Typography variant="h6">
-					Current Weather in Dubai, United Arab Emirates
-				</Typography>
-			</Grid>
-			<Grid item xs={12} container spacing={4} justify="center">
-				<Grid item>
-					<Icon
-						path={iconMap[(data.weather[0].icon as string).substring(0, 2)]}
-						color={data.weather[0].icon.endsWith('d') ? orange[500] : grey[500]}
-						size={matched ? '4rem' : '8rem'}
-					/>
-				</Grid>
-				<Grid item>
-					<Typography variant={matched ? 'h2' : 'h1'}>
-						{data.main.temp.toFixed(0)}° F
-					</Typography>
-				</Grid>
-				<Grid item xs={12}>
-					<Typography variant="h6">{data.weather[0].main}</Typography>
-				</Grid>
-			</Grid>
-		</Grid>
+		<>
+			<Typography variant="h6">Current Weather in Dubai</Typography>
+			<div className={classes.mainContent}>
+				{data ? (
+					<Grid
+						container
+						spacing={4}
+						className={classes.grid}
+						justify="space-between"
+					>
+						<Grid item xs={12}>
+							<Typography variant="h6">
+								{new Intl.DateTimeFormat('en-US', {
+									weekday: 'long',
+									hour: 'numeric',
+									minute: 'numeric',
+									timeZone: 'Asia/Dubai',
+								}).format(time)}
+								, {data.weather[0].main}
+							</Typography>
+						</Grid>
+						<Grid item container justify="flex-start" xs={8}>
+							<Grid item>
+								<Typography variant="h1">
+									{data.main.temp.toFixed(0)}°
+								</Typography>
+							</Grid>
+							<Grid item>
+								<Typography variant="h3">F</Typography>
+							</Grid>
+						</Grid>
+						<Grid item container justify="flex-end" xs={4}>
+							<Grid item>
+								<Icon
+									path={iconMap[data.weather[0].icon as string].icon}
+									color={iconMap[data.weather[0].icon as string].color}
+									size="8rem"
+								/>
+							</Grid>
+						</Grid>
+					</Grid>
+				) : (
+					<div className={classes.loader}>
+						<CircularProgress />
+					</div>
+				)}
+			</div>
+		</>
 	);
 }
