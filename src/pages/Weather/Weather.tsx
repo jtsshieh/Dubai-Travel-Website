@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function Weather() {
 	const classes = useStyles();
+
 	return (
 		<>
 			<ReactMarkdown escapeHtml={false} renderers={renderers}>

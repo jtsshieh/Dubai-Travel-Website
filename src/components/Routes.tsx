@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 	content: {
 		color: theme.palette.text.primary,
 		overflow: 'hidden',
+		paddingBottom: theme.spacing(4),
 	},
 }));
 
