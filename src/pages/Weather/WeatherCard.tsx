@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+	Box,
 	CircularProgress,
 	Grid,
 	makeStyles,
@@ -90,12 +91,7 @@ export function WeatherCard() {
 			<Typography variant="h6">Current Weather in Dubai</Typography>
 			<div className={classes.mainContent}>
 				{data ? (
-					<Grid
-						container
-						spacing={4}
-						className={classes.grid}
-						justify="space-between"
-					>
+					<Grid container spacing={4} className={classes.grid} justify="center">
 						<Grid item xs={12}>
 							<Typography variant="h6">
 								{new Intl.DateTimeFormat('en-US', {
@@ -107,24 +103,17 @@ export function WeatherCard() {
 								, {data.weather[0].main}
 							</Typography>
 						</Grid>
-						<Grid item container justify="flex-start" xs={8}>
-							<Grid item>
-								<Typography variant="h1">
-									{data.main.temp.toFixed(0)}°
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Typography variant="h3">F</Typography>
-							</Grid>
+						<Grid item>
+							<Icon
+								path={iconMap[data.weather[0].icon as string].icon}
+								color={iconMap[data.weather[0].icon as string].color}
+								size="8rem"
+							/>
 						</Grid>
-						<Grid item container justify="flex-end" xs={4}>
-							<Grid item>
-								<Icon
-									path={iconMap[data.weather[0].icon as string].icon}
-									color={iconMap[data.weather[0].icon as string].color}
-									size="8rem"
-								/>
-							</Grid>
+						<Grid item>
+							<Typography variant="h1">
+								{data.main.temp.toFixed(0)}° F
+							</Typography>
 						</Grid>
 					</Grid>
 				) : (
