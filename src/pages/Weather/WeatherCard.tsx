@@ -4,8 +4,6 @@ import {
 	Grid,
 	makeStyles,
 	Typography,
-	useMediaQuery,
-	useTheme,
 } from '@material-ui/core';
 import { blue, grey, orange } from '@material-ui/core/colors';
 import {
