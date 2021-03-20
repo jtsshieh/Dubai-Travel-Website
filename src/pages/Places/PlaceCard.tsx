@@ -9,7 +9,6 @@ import {
 	Typography,
 } from '@material-ui/core';
 import { Header } from '../../utils/RouteConstants';
-import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
 	media: {

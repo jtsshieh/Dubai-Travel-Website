@@ -1,10 +1,4 @@
-import {
-	Button,
-	Card,
-	CardContent,
-	makeStyles,
-	Typography,
-} from '@material-ui/core';
+import { Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +13,8 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(1),
 		width: '40em',
 		height: '15em',
-	},
-	cardContent: {
 		display: 'flex',
 		flexDirection: 'column',
-		width: '100%',
-		height: '100%',
 	},
 	cardPart: {
 		flex: 1,
@@ -38,18 +28,16 @@ export function NotFound() {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
-			<Card className={classes.card}>
-				<CardContent className={classes.cardContent}>
-					<div className={classes.cardPart}>
-						<Typography variant="h4">Page not found</Typography>
-					</div>
-					<div className={classes.cardPart}>
-						<Button component={Link} to="/" variant="contained" color="primary">
-							Back to Home
-						</Button>
-					</div>
-				</CardContent>
-			</Card>
+			<Paper className={classes.card} variant="outlined">
+				<div className={classes.cardPart}>
+					<Typography variant="h4">Page not found</Typography>
+				</div>
+				<div className={classes.cardPart}>
+					<Button component={Link} to="/" variant="contained" color="primary">
+						Back to Home
+					</Button>
+				</div>
+			</Paper>
 		</div>
 	);
 }
