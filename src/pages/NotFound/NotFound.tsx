@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-	outer: {
+	root: {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export function NotFound() {
 	const classes = useStyles();
 	return (
-		<div className={classes.outer}>
+		<div className={classes.root}>
 			<Card className={classes.card}>
 				<CardContent className={classes.cardContent}>
 					<div className={classes.cardPart}>

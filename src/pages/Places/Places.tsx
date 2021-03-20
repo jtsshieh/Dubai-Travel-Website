@@ -7,6 +7,7 @@ import { BurjKhalifa } from './data/BurjKhalifa';
 import { PalmJumeirah } from './data/PalmJumeirah';
 import DubaiImage from '../../images/dubai.jpg';
 import { DubaiFountains } from './data/DubaiFountains';
+import { SheikhZayedMosque } from './data/SheikhZayedMosque';
 
 const useStyles = makeStyles({
 	gridItem: {
@@ -23,12 +24,20 @@ export function Places() {
 		BurjKhalifa,
 		PalmJumeirah,
 		DubaiFountains,
+		SheikhZayedMosque,
 	];
 
 	return (
 		<Grid container spacing={4} alignItems="stretch">
 			{places.map(({ name, header, text, link }) => (
-				<Grid item md={4} sm={6} xs={12} className={classes.gridItem}>
+				<Grid
+					item
+					md={4}
+					sm={6}
+					xs={12}
+					className={classes.gridItem}
+					key={name}
+				>
 					<PlaceCard name={name} header={header} text={text} link={link} />
 				</Grid>
 			))}

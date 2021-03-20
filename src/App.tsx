@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
 	createMuiTheme,
 	CssBaseline,
@@ -24,7 +24,7 @@ function App() {
 		setDarkTheme(prefersDarkMode);
 	}, [prefersDarkMode]);
 
-	const theme = React.useMemo(
+	const theme = useMemo(
 		() =>
 			createMuiTheme({
 				palette: {
