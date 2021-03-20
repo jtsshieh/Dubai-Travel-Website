@@ -8,7 +8,7 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
-import { Header } from '../../components/RouteConstants';
+import { Header } from '../../utils/RouteConstants';
 import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({

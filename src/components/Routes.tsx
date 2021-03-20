@@ -5,7 +5,7 @@ import {
 	AppRoute,
 	isRouteWithChildren,
 	isTopRoute,
-} from './RouteConstants';
+} from '../utils/RouteConstants';
 import { AbstractPage } from './AbstractPage';
 import { NotFound } from '../pages/NotFound/NotFound';
 

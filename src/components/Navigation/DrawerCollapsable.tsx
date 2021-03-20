@@ -8,7 +8,7 @@ import {
 	makeStyles,
 } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import { AppRoute } from '../RouteConstants';
+import { AppRoute } from '../../utils/RouteConstants';
 import clsx from 'clsx';
 
 interface DrawerCollapsableProps {

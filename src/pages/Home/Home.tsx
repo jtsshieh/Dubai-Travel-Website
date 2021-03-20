@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { Home as HomeIcon } from '@material-ui/icons';
 import DubaiFountains from '../../images/dubai_fountain.jpg';
-import { TopRoute } from '../../components/RouteConstants';
+import { TopRoute } from '../../utils/RouteConstants';
 
 export function Home() {
 	return (

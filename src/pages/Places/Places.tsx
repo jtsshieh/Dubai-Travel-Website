@@ -1,6 +1,6 @@
 import { Place as PlaceIcon } from '@material-ui/icons';
 import { BurjAlArab } from './data/BurjAlArab';
-import { TopRoute } from '../../components/RouteConstants';
+import { TopRoute } from '../../utils/RouteConstants';
 import { Grid, makeStyles } from '@material-ui/core';
 import { PlaceCard, PlaceCardProps } from './PlaceCard';
 import { BurjKhalifa } from './data/BurjKhalifa';

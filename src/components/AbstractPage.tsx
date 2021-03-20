@@ -1,6 +1,6 @@
 import { Card, makeStyles, Typography } from '@material-ui/core';
 import { createElement } from 'react';
-import { TopRoute } from './RouteConstants';
+import { TopRoute } from '../utils/RouteConstants';
 import { Link } from '@material-ui/core';
 
 interface AbstractPageProps {

@@ -17,7 +17,7 @@ import {
 	isRouteWithChildren,
 	isSubheader,
 	isTopRoute,
-} from '../RouteConstants';
+} from '../../utils/RouteConstants';
 import { DrawerCollapsable } from './DrawerCollapsable';
 import { DrawerItem as DrawerItemComponent } from './DrawerItem';
 
