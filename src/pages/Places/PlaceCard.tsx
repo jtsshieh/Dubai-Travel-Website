@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 	cardContent: {
 		flex: 1,
 	},
+	button: {
+		marginLeft: 'auto',
+	},
 }));
 
 export interface PlaceCardProps {
@@ -47,15 +50,9 @@ export interface PlaceCardProps {
 
 export function PlaceCard({ name, header, text, link }: PlaceCardProps) {
 	const classes = useStyles();
-	const [isHovering, setIsHovering] = useState(false);
 
 	return (
-		<Card
-			className={classes.card}
-			elevation={isHovering ? 24 : 1}
-			onMouseOver={() => setIsHovering(true)}
-			onMouseOut={() => setIsHovering(false)}
-		>
+		<Card className={classes.card}>
 			<CardMedia image={header.image} title={name} className={classes.media}>
 				{header.credits && (
 					<Typography variant="body2" className={classes.credits}>
@@ -80,7 +77,13 @@ export function PlaceCard({ name, header, text, link }: PlaceCardProps) {
 			</CardContent>
 			{link && (
 				<CardActions>
-					<Button color="primary" target="_blank" rel="noopener" href={link}>
+					<Button
+						color="primary"
+						target="_blank"
+						rel="noopener"
+						href={link}
+						className={classes.button}
+					>
 						Learn More
 					</Button>
 				</CardActions>
