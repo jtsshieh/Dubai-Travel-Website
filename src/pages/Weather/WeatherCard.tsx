@@ -41,6 +41,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+interface GetWeatherDataResponse {
+	temp: number;
+	icon: WeatherIcon;
+	condition: string;
+	time: number;
+}
+
+type IconType = '01' | '02' | '03' | '04' | '09' | '10' | '11' | '13' | '50';
+type IconTime = 'd' | 'n';
+type WeatherIcon = `${IconType}${IconTime}`;
+
 const iconMap: Record<string, { icon: string; color: string }> = {
 	'01d': { icon: mdiMoonFull, color: orange[500] },
 	'01n': { icon: mdiMoonWaningCrescent, color: grey[700] },
@@ -71,7 +82,7 @@ const iconMap: Record<string, { icon: string; color: string }> = {
 };
 
 export function WeatherCard() {
-	const [data, setData] = useState<any>();
+	const [data, setData] = useState<GetWeatherDataResponse>();
 	const classes = useStyles();
 
 	useEffect(() => {
@@ -80,7 +91,7 @@ export function WeatherCard() {
 			.then(setData);
 	}, []);
 
-	const time = data ? new Date(data.dt * 1000) : undefined;
+	const time = data ? new Date(data.time * 1000) : undefined;
 
 	return (
 		<>
@@ -96,20 +107,18 @@ export function WeatherCard() {
 									minute: 'numeric',
 									timeZone: 'Asia/Dubai',
 								}).format(time)}
-								, {data.weather[0].main}
+								, {data.condition}
 							</Typography>
 						</Grid>
 						<Grid item>
 							<Icon
-								path={iconMap[data.weather[0].icon as string].icon}
-								color={iconMap[data.weather[0].icon as string].color}
+								path={iconMap[data.icon].icon}
+								color={iconMap[data.icon].color}
 								size="8rem"
 							/>
 						</Grid>
 						<Grid item>
-							<Typography variant="h1">
-								{data.main.temp.toFixed(0)}° F
-							</Typography>
+							<Typography variant="h1">{data.temp}° F</Typography>
 						</Grid>
 					</Grid>
 				) : (
