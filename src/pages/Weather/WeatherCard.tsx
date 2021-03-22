@@ -91,8 +91,6 @@ export function WeatherCard() {
 			.then(setData);
 	}, []);
 
-	const time = data ? new Date(data.time * 1000) : undefined;
-
 	return (
 		<>
 			<Typography variant="h6">Current Weather in Dubai</Typography>
@@ -106,7 +104,7 @@ export function WeatherCard() {
 									hour: 'numeric',
 									minute: 'numeric',
 									timeZone: 'Asia/Dubai',
-								}).format(time)}
+								}).format(new Date(data.time * 1000))}
 								, {data.condition}
 							</Typography>
 						</Grid>
